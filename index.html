@@ -5,7 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <link rel="stylesheet" href="./css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
     <script src="./js/app.js" defer></script>
   </head>
   <body>
@@ -15,7 +25,7 @@
 
     <main>
       <div class="album_art__full">
-        <img src="#" alt="full album art" />
+        <img src="./img/ariana-grande-full.png" alt="full album art" />
         <button id="btnShuffle" title="shuffle">
           <i class="material-symbols-rounded">shuffle</i>
         </button>
@@ -23,14 +33,107 @@
       <ul class="playlist">
         <li class="track__item">
           <div class="track__thumb">
-            <img src="#" alt="artist album art thumbnail" />
+            <img
+              src="./img/ariana-grande-thumb.png    "
+              alt="artist album art thumbnail"
+            />
           </div>
           <div class="track__details">
-            <p class="track__title">Song Title</p>
-            <p class="track__artist">Song Artist</p>
+            <p class="track__title">no tears left to cry</p>
+            <p class="track__artist">Ariana Grande</p>
           </div>
           <div class="track__time">
-            <time datetime="">00:00</time>
+            <time datetime="">03:58</time>
+          </div>
+        </li>
+        <li class="track__item">
+          <div class="track__thumb">
+            <img
+              src="./img/akcent-thumb.png"
+              alt="artist album art thumbnail"
+            />
+          </div>
+          <div class="track__details">
+            <p class="track__title">Przez Twe Oczy Zielone</p>
+            <p class="track__artist">Akcent</p>
+          </div>
+          <div class="track__time">
+            <time datetime="">03:41</time>
+          </div>
+        </li>
+        <li class="track__item">
+          <div class="track__thumb">
+            <img
+              src="./img/manu-chao-thumb.png"
+              alt="artist album art thumbnail"
+            />
+          </div>
+          <div class="track__details">
+            <p class="track__title">Clandestino</p>
+            <p class="track__artist">Manu Chao</p>
+          </div>
+          <div class="track__time">
+            <time datetime="">02:29</time>
+          </div>
+        </li>
+        <li class="track__item">
+          <div class="track__thumb">
+            <img
+              src="./img/j-balvin-thumb.png"
+              alt="artist album art thumbnail"
+            />
+          </div>
+          <div class="track__details">
+            <p class="track__title">Azul</p>
+            <p class="track__artist">J Balvin</p>
+          </div>
+          <div class="track__time">
+            <time datetime="">03:25</time>
+          </div>
+        </li>
+        <li class="track__item">
+          <div class="track__thumb">
+            <img
+              src="./img/tommy-rey-thumb.png"
+              alt="artist album art thumbnail"
+            />
+          </div>
+          <div class="track__details">
+            <p class="track__title">Daniela</p>
+            <p class="track__artist">Tommy Rey</p>
+          </div>
+          <div class="track__time">
+            <time datetime="">03:18</time>
+          </div>
+        </li>
+        <li class="track__item">
+          <div class="track__thumb">
+            <img
+              src="./img/llajtaymanta-thumb.png"
+              alt="artist album art thumbnail"
+            />
+          </div>
+          <div class="track__details">
+            <p class="track__title">Para Que La Vida</p>
+            <p class="track__artist">Llajtaymanta</p>
+          </div>
+          <div class="track__time">
+            <time datetime="">03:15</time>
+          </div>
+        </li>
+        <li class="track__item">
+          <div class="track__thumb">
+            <img
+              src="./img/rauw-alejandro-thumb.png"
+              alt="artist album art thumbnail"
+            />
+          </div>
+          <div class="track__details">
+            <p class="track__title">Reloj</p>
+            <p class="track__artist">Rauw Alejandro</p>
+          </div>
+          <div class="track__time">
+            <time datetime="">03:48</time>
           </div>
         </li>
       </ul>
@@ -40,7 +143,7 @@
       <div class="played"></div>
     </section>
 
-    <footer>
+    <footer class="footer">
       <div class="controls">
         <button id="btnPrev" title="previous track">
           <i class="material-symbols-rounded">skip_previous</i>

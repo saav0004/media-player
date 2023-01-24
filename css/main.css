@@ -33,8 +33,9 @@ ol[role="list"] {
 
 html {
   line-height: 1.5;
-  font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
 }
 
 html:focus-within {
@@ -106,4 +107,73 @@ select {
   --dark-orange: #fb8b24ff;
   --emerald: #32de8aff;
   --smoky-black: #090302ff;
+}
+
+body {
+  background-color: var(--smoky-black);
+}
+
+header {
+  text-align: center;
+}
+
+.album_art__full {
+  padding: 2rem;
+}
+
+h1 {
+  color: var(--white);
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* MAIN */
+
+.playlist {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.track__item {
+  border: 0.12rem solid #767676;
+  background-color: #181818;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.track__thumb {
+}
+
+.track__details {
+  text-align: left;
+
+  padding-left: 1.5rem;
+}
+
+.track__title {
+  color: var(--white);
+}
+
+.track__artist {
+  color: var(--white);
+}
+
+.track__time {
+  text-align: right;
+}
+
+footer {
+  display: flex;
+}
+
+time {
+  color: var(--emerald);
 }
