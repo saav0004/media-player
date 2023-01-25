@@ -193,6 +193,13 @@ header {
 
 footer {
   background-color: var(--vivid-burgundy);
+  background: linear-gradient(
+    to top,
+
+    #333 10%,
+    var(--vivid-burgundy) 100%,
+    rgb(82, 82, 82) 20%
+  );
   display: flex;
   justify-content: space-evenly;
   padding: 1.5rem;
