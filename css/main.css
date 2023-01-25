@@ -119,10 +119,20 @@ header {
 
 .album_art__full {
   padding: 2rem;
+  display: inline-flex;
+  flex-direction: column;
 }
 
-h1 {
+#btnShuffle {
+  align-self: center;
+  margin-top: 1.5rem;
+}
+
+.header__h1 {
+  margin-top: 2rem;
   color: var(--white);
+  margin-bottom: 0;
+  text-align: center;
 }
 
 .controls {
@@ -141,21 +151,24 @@ h1 {
 .track__item {
   border: 0.12rem solid #767676;
   background-color: #181818;
-
   display: flex;
   justify-content: space-between;
+  gap: 2rem;
   align-items: center;
   margin-bottom: 1rem;
   padding: 1rem;
 }
 
+.track__item:hover {
+  background-color: #232323;
+}
+
 .track__thumb {
+  flex-shrink: 0;
 }
 
 .track__details {
-  text-align: left;
-
-  padding-left: 1.5rem;
+  flex-grow: 1;
 }
 
 .track__title {
@@ -164,16 +177,45 @@ h1 {
 
 .track__artist {
   color: var(--white);
+  margin: 0;
 }
 
 .track__time {
   text-align: right;
 }
 
+.progress {
+  background-color: var(--vivid-burgundy);
+}
+.played {
+  background-color: var(--emerald);
+}
+
 footer {
+  background-color: var(--vivid-burgundy);
   display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+  align-items: center;
 }
 
 time {
   color: var(--emerald);
+}
+
+button {
+  background: transparent;
+  border: 0;
+  color: var(--white);
+}
+
+@media only screen and (min-width: 60em) {
+  .main__content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .playlist {
+    padding-top: 2rem;
+  }
 }
