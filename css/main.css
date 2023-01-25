@@ -194,9 +194,13 @@ header {
 footer {
   background-color: var(--vivid-burgundy);
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 1.5rem;
+  margin-bottom: 0.5rem;
   align-items: center;
+  position: sticky;
+  bottom: 0;
+  z-index: 999999999999999;
 }
 
 time {
@@ -207,6 +211,18 @@ button {
   background: transparent;
   border: 0;
   color: var(--white);
+}
+
+#btnPrev {
+  padding: 1rem;
+}
+
+#btnPlay {
+  padding: 1rem;
+}
+
+#btnNext {
+  padding: 1rem;
 }
 
 @media only screen and (min-width: 60em) {
