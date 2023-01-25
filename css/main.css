@@ -121,6 +121,7 @@ header {
   padding: 2rem;
   display: inline-flex;
   flex-direction: column;
+  width: min(38rem, 100%);
 }
 
 #btnShuffle {
@@ -236,9 +237,14 @@ button {
   .main__content {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
   }
 
   .playlist {
     padding-top: 2rem;
+  }
+
+  .material-symbols-rounded {
+    font-size: 3.4rem;
   }
 }
