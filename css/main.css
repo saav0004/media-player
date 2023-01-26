@@ -111,10 +111,21 @@ select {
 
 body {
   background-color: var(--smoky-black);
+  overflow: hidden;
 }
 
 header {
   text-align: center;
+  position: fixed;
+  background-color: var(--vivid-burgundy);
+  width: 100%;
+  background: linear-gradient(
+    to top,
+
+    rgb(28, 28, 28) 10%,
+    var(--vivid-burgundy) 100%,
+    rgb(51, 51, 51) 10%
+  );
 }
 
 .album_art__full {
@@ -130,7 +141,7 @@ header {
 }
 
 .header__h1 {
-  margin-top: 2rem;
+  padding: 0.5rem 0 0.5rem 0;
   color: var(--white);
   margin-bottom: 0;
   text-align: center;
@@ -144,9 +155,30 @@ header {
 
 /* MAIN */
 
+.main__content {
+  top: 4rem;
+  position: relative;
+}
+
 .playlist {
   margin-left: 0;
   padding-left: 0;
+}
+
+/* ? scroll bar playlist */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+*::-webkit-scrollbar-track {
+  background: var(--dark-gray);
+  border-bottom-right-radius: 0.35rem;
+  border-top-right-radius: 0.35rem;
+  border-right: 0.025rem solid var(--dark-orange);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--dark-orange);
+  border-radius: 20px;
+  border: 2px solid var(--black);
 }
 
 .track__item {
@@ -242,6 +274,8 @@ button {
 
   .playlist {
     padding-top: 2rem;
+    height: 85vh;
+    overflow: scroll;
   }
 
   .material-symbols-rounded {
