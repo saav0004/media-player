@@ -270,9 +270,9 @@ header {
   margin: 0;
 }
 
-.track__time {
+/* .track__time {
   text-align: right;
-}
+} */
 
 .progress {
   display: block;
@@ -306,6 +306,9 @@ footer {
 
 time {
   color: var(--emerald);
+}
+
+.times {
   text-align: center;
 }
 
