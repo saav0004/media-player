@@ -205,12 +205,6 @@ header {
 .stroke:nth-child(5) {
   animation-delay: 0s;
 }
-.stroke:nth-child(6) {
-  animation-delay: 0.5s;
-}
-.stroke:nth-child(7) {
-  animation-delay: 0.1s;
-}
 
 .controls {
   display: flex;
@@ -278,12 +272,18 @@ header {
   display: block;
   height: 6px;
   background-color: var(--white);
+  border-radius: 10px;
 }
 .played {
+  border-radius: 10px;
   display: block;
   background-color: var(--emerald);
   width: 20%;
   height: 6px;
+}
+
+.nbsp {
+  color: var(--white);
 }
 
 footer {
@@ -340,8 +340,7 @@ button {
 
   .playlist {
     padding-top: 2rem;
-    height: 80vh;
-    overflow: scroll;
+    height: 100vh;
   }
 
   *::-webkit-scrollbar {
