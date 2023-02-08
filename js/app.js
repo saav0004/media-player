@@ -3,15 +3,7 @@ import { MEDIA } from "./media.js"; //the data file import
 const APP = {
   audio: new Audio(), //the Audio Element that will play every track
   currentTrack: 0, //the integer representing the index in the MEDIA array
-  tracks: [
-    "azul",
-    "clandestino",
-    "daniela",
-    "no-tears-left-to-cry",
-    "para-que-la-vida",
-    "przez-twe-oczy-zielone",
-    "reloj",
-  ], //array of tracks
+  tracks: [], //array of tracks
   init: () => {
     console.log("llegue a init");
     //called when DOMContentLoaded is triggered
@@ -48,7 +40,7 @@ const APP = {
     <p class="track__artist">${music.artist}</p>
   </div>
   <div class="track__time">
-    <time datetime="">03:41</time>
+    <time datetime="">00:00</time>
   </div>
 </li>`;
     }).join("");
