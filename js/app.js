@@ -19,13 +19,13 @@ const APP = {
     //? Event Listeners AUDIO
     //add event listeners for interface elements
     //add event listeners for APP.audio
-    // APP.audio.addEventListener("error", APP.audioError);
     // APP.audio.addEventListener("ended", APP.ended);
     // APP.audio.addEventListener("loadstart", APP.loadstart);
     // APP.audio.addEventListener("loadedmetadata", APP.loadedmetadata);
     // APP.audio.addEventListener("canplay", APP.canplay);
     APP.audio.addEventListener("durationchange", APP.durationchange);
     APP.audio.addEventListener("timeupdate", APP.currentTime);
+    APP.audio.addEventListener("error", APP.audioError);
     // APP.audio.addEventListener("play", APP.play);
     // APP.audio.addEventListener("pause", APP.pause);
   },
@@ -55,6 +55,9 @@ const APP = {
     // console.log(APP.tracks);
     APP.loadCurrentTrack();
   },
+  errorHandler: (ev) => {
+    console.log("ERROR OH NOOO PLZZZZ");
+  },
   loadCurrentTrack: () => {
     //load function in steve's video
     //use the currentTrack value to set the src of the APP.audio element
@@ -63,9 +66,8 @@ const APP = {
     // console.log("Audio has been loaded", APP.audio.src);
   },
   loadLargeImage: () => {
-    let albumArt = document.getElementById("album_art__image");
+    let albumArt = document.querySelector(".album_art__image");
     let largeImage = "";
-    console.log("Estoy en load large image");
 
     MEDIA.forEach((artist) => {
       if (artist.track == APP.tracks[0]) {
