@@ -7,14 +7,16 @@ const APP = {
   init: () => {
     console.log("llegue a init");
     //called when DOMContentLoaded is triggered
-    APP.loadCurrentTrack();
     APP.addListeners();
+    APP.loadCurrentTrack();
     APP.buildPlaylist();
   },
   addListeners: () => {
-    //DOM events
-    document.getElementById("btnPlay").addEventListener("click", APP.startPlay);
-    document.getElementById("btnPause", APP.pausePlay);
+    //? DOM events
+    document
+      .getElementById("btnPlay")
+      .addEventListener("click", APP.CheckPlayOrPause);
+    //? Event Listeners AUDIO
     //add event listeners for interface elements
     //add event listeners for APP.audio
     // APP.audio.addEventListener("error", APP.audioError);
@@ -51,6 +53,14 @@ const APP = {
     //use the currentTrack value to set the src of the APP.audio element
     // APP.audio.src = `./media/${APP.tracks[APP.currentTrack]}`;
     // console.log("Audio has been loaded", APP.audio.src);
+  },
+  CheckPlayOrPause: () => {
+    let playButton = document.getElementById("btnPlay").firstElementChild;
+    if (playButton.textContent === "play_arrow") {
+      playButton.innerHTML = "pause";
+    } else {
+      playButton.innerHTML = "play_arrow";
+    }
   },
   play: () => {
     //start the track loaded into APP.audio playing
