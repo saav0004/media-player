@@ -9,6 +9,7 @@ const APP = {
     //called when DOMContentLoaded is triggered
     APP.addListeners();
     APP.buildPlaylist();
+    APP.loadLargeImage();
   },
   addListeners: () => {
     //? DOM events
@@ -61,6 +62,18 @@ const APP = {
     console.log("i am in load current tracks");
     // console.log("Audio has been loaded", APP.audio.src);
   },
+  loadLargeImage: () => {
+    let albumArt = document.getElementById("album_art__image");
+    let largeImage = "";
+    console.log("Estoy en load large image");
+
+    MEDIA.forEach((artist) => {
+      if (artist.track == APP.tracks[0]) {
+        largeImage = artist.large;
+      }
+      albumArt.src = `/img/${largeImage}`;
+    });
+  },
   CheckPlayOrPause: () => {
     let playButton = document.getElementById("btnPlay").firstElementChild;
     if (playButton.textContent === "play_arrow") {
@@ -73,15 +86,15 @@ const APP = {
   },
   play: () => {
     if (APP.audio.src) {
+      //start the track loaded into APP.audio playing
       APP.audio.play();
     } else {
       console.warn("You need to load a track first");
     }
-    //start the track loaded into APP.audio playing
   },
   pause: () => {
-    APP.audio && APP.audio.pause();
     //pause the track loaded into APP.audio playing
+    APP.audio && APP.audio.pause();
   },
   durationchange: (ev) => {
     console.log(ev.type);
@@ -95,6 +108,7 @@ const APP = {
     totalTime.textContent = convertion;
   },
   convertTimeDisplay: (seconds) => {
+    //convert the seconds parameter to `00:00` style display
     let flooredMinutes = Math.floor(seconds / 60)
       .toString()
       .padStart(2, "0");
@@ -103,8 +117,6 @@ const APP = {
       .padStart(2, "0");
 
     return `${flooredMinutes}:${flooredSeconds}`;
-
-    //convert the seconds parameter to `00:00` style display
   },
 };
 
