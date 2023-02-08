@@ -27,7 +27,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/main.css" />
-    <script src="./js/app.js" defer></script>
+    <script src="./js/utils.js" type="module"></script>
+    <script src="./js/app.js" type="module"></script>
   </head>
   <body>
     <header>
@@ -46,120 +47,14 @@
         <div class="album_art__full">
           <img
             class="album_art__image"
-            src="./img/ariana-grande-full.png"
+            src="./img/azul-full.png"
             alt="full album art"
           />
           <button id="btnShuffle" title="shuffle">
             <i class="material-symbols-rounded">shuffle</i>
           </button>
         </div>
-        <ul class="playlist">
-          <li class="track__item active">
-            <div class="track__thumb">
-              <img
-                src="./img/ariana-grande-thumb.png    "
-                alt="artist album art thumbnail"
-              />
-            </div>
-            <div class="track__details">
-              <p class="track__title">no tears left to cry</p>
-              <p class="track__artist">Ariana Grande</p>
-            </div>
-            <div class="track__time">
-              <time datetime="">03:58</time>
-            </div>
-          </li>
-          <li class="track__item">
-            <div class="track__thumb">
-              <img
-                src="./img/akcent-thumb.png"
-                alt="artist album art thumbnail"
-              />
-            </div>
-            <div class="track__details">
-              <p class="track__title">Przez Twe Oczy Zielone</p>
-              <p class="track__artist">Akcent</p>
-            </div>
-            <div class="track__time">
-              <time datetime="">03:41</time>
-            </div>
-          </li>
-          <li class="track__item">
-            <div class="track__thumb">
-              <img
-                src="./img/manu-chao-thumb.png"
-                alt="artist album art thumbnail"
-              />
-            </div>
-            <div class="track__details">
-              <p class="track__title">Clandestino</p>
-              <p class="track__artist">Manu Chao</p>
-            </div>
-            <div class="track__time">
-              <time datetime="">02:29</time>
-            </div>
-          </li>
-          <li class="track__item">
-            <div class="track__thumb">
-              <img
-                src="./img/j-balvin-thumb.png"
-                alt="artist album art thumbnail"
-              />
-            </div>
-            <div class="track__details">
-              <p class="track__title">Azul</p>
-              <p class="track__artist">J Balvin</p>
-            </div>
-            <div class="track__time">
-              <time datetime="">03:25</time>
-            </div>
-          </li>
-          <li class="track__item">
-            <div class="track__thumb">
-              <img
-                src="./img/tommy-rey-thumb.png"
-                alt="artist album art thumbnail"
-              />
-            </div>
-            <div class="track__details">
-              <p class="track__title">Daniela</p>
-              <p class="track__artist">Tommy Rey</p>
-            </div>
-            <div class="track__time">
-              <time datetime="">03:18</time>
-            </div>
-          </li>
-          <li class="track__item">
-            <div class="track__thumb">
-              <img
-                src="./img/llajtaymanta-thumb.png"
-                alt="artist album art thumbnail"
-              />
-            </div>
-            <div class="track__details">
-              <p class="track__title">Para Que La Vida</p>
-              <p class="track__artist">Llajtaymanta</p>
-            </div>
-            <div class="track__time">
-              <time datetime="">03:15</time>
-            </div>
-          </li>
-          <li class="track__item">
-            <div class="track__thumb">
-              <img
-                src="./img/rauw-alejandro-thumb.png"
-                alt="artist album art thumbnail"
-              />
-            </div>
-            <div class="track__details">
-              <p class="track__title">Reloj</p>
-              <p class="track__artist">Rauw Alejandro</p>
-            </div>
-            <div class="track__time">
-              <time datetime="">03:48</time>
-            </div>
-          </li>
-        </ul>
+        <ul class="playlist" id="playlist"></ul>
       </div>
     </main>
 
