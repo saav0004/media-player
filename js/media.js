@@ -38,8 +38,8 @@ const MEDIA = [
     artist: "Akcent",
     title: "Przez Twe Oczy Zielone",
     track: "przez-twe-oczy-zielone.mp3",
-    thumbnail: "zielone-thumb.png",
-    large: "zielone-full.png",
+    thumbnail: "przez-twe-oczy-zielone-thumb.png",
+    large: "przez-twe-oczy-zielone-full.png",
   },
   {
     artist: "Rauw Alejandro",
