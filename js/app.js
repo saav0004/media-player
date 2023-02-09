@@ -33,7 +33,7 @@ const APP = {
     APP.audio.src = `./media/${APP}`;
     let ul = document.getElementById("playlist");
     ul.innerHTML = MEDIA.map((music) => {
-      return `<li class="track__item">
+      return `<li class="track__item" id="${music.title}">
   <div class="track__thumb">
     <img src="./img/${music.thumbnail}" alt="artist album art thumbnail" />
   </div>
@@ -69,6 +69,25 @@ const APP = {
     APP.audio.src = `./media/${APP.tracks[APP.currentTrack]}`;
     console.log("i am in load current tracks");
     // console.log("Audio has been loaded", APP.audio.src);
+    APP.currentTrackDecoration();
+  },
+  currentTrackDecoration: () => {
+    let currentArtist = "";
+    MEDIA.forEach((artist) => {
+      if (artist.track == APP.tracks[APP.currentTrack]) {
+        return (currentArtist = artist.title);
+      }
+    });
+    console.log(currentArtist);
+    let artistLi = document.querySelectorAll(".track__item");
+    console.log(artistLi);
+    artistLi.forEach((artist) => {
+      console.log(artist);
+      if (`${artist.id}` == `${currentArtist}`) {
+        artist.classList.add("active-li");
+        console.log(artist);
+      }
+    });
   },
   loadLargeImage: () => {
     let albumArt = document.querySelector(".album_art__image");

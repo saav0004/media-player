@@ -269,6 +269,11 @@ header {
   margin: 0;
 }
 
+.active-li p {
+  color: var(--emerald);
+  font-weight: bolder;
+}
+
 /* .track__time {
   text-align: right;
 } */
