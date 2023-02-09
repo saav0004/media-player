@@ -138,6 +138,10 @@ header {
   );
 }
 
+.error-h2 {
+  color: var(--white);
+}
+
 .album_art__full {
   padding: 2rem;
   display: inline-flex;
@@ -225,7 +229,7 @@ header {
 .playlist {
   margin-left: 0;
   padding-left: 0;
-  padding-bottom: 4.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .track__item {
@@ -256,13 +260,27 @@ header {
 }
 
 .track__title {
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: var(--white);
 }
 
 .track__artist {
   color: var(--white);
   margin: 0;
+  font-size: 0.833rem;
+}
+
+.active-li p {
+  color: var(--emerald);
+  font-weight: bolder;
+}
+
+.active-li .track__thumb {
+  border-left: var(--emerald) 0.5rem solid;
+}
+
+.active-li {
+  background-color: var(--vivid-burgundy);
 }
 
 /* .track__time {
@@ -301,6 +319,7 @@ footer {
   padding: 1.5rem;
   align-items: center;
   position: sticky;
+  width: 100%;
   bottom: 0;
   z-index: 999999999999999;
 }
@@ -341,6 +360,7 @@ button {
 
   .playlist {
     padding-top: 2rem;
+    margin-bottom: 6rem;
     height: 100vh;
   }
 
@@ -360,5 +380,9 @@ button {
 
   .material-symbols-rounded {
     font-size: 3.4rem;
+  }
+
+  .material-symbols-rounded:hover {
+    color: var(--emerald);
   }
 }
