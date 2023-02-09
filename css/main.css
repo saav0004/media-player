@@ -274,6 +274,12 @@ header {
   font-weight: bolder;
 }
 
+.active-li .track__thumb {
+  border-left: var(--emerald) 0.5rem solid;
+}
+
+.active-li 
+
 /* .track__time {
   text-align: right;
 } */
