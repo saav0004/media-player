@@ -5,7 +5,6 @@ const APP = {
   currentTrack: 0, //the integer representing the index in the MEDIA array
   tracks: [], //array of tracks
   init: () => {
-    console.log("I am in init");
     //called when DOMContentLoaded is triggered
     APP.addListeners();
     APP.buildPlaylist();
@@ -16,16 +15,17 @@ const APP = {
     document
       .getElementById("btnPlay")
       .addEventListener("click", APP.CheckPlayOrPause);
-    //? Event Listeners AUDIO
-    //add event listeners for interface elements
-    //add event listeners for APP.audio
+    //? AUDIO Event Listeners
+
+    APP.audio.addEventListener("durationchange", APP.durationchange);
+    APP.audio.addEventListener("timeupdate", APP.currentTime);
+    APP.audio.addEventListener("error", APP.errorHandler);
+
+    //? AUDIO Event listeners for future use
     // APP.audio.addEventListener("ended", APP.ended);
     // APP.audio.addEventListener("loadstart", APP.loadstart);
     // APP.audio.addEventListener("loadedmetadata", APP.loadedmetadata);
     // APP.audio.addEventListener("canplay", APP.canplay);
-    APP.audio.addEventListener("durationchange", APP.durationchange);
-    APP.audio.addEventListener("timeupdate", APP.currentTime);
-    APP.audio.addEventListener("error", APP.errorHandler);
     // APP.audio.addEventListener("play", APP.play);
     // APP.audio.addEventListener("pause", APP.pause);
   },
@@ -52,23 +52,19 @@ const APP = {
     playList.forEach((music) => {
       APP.tracks.push(music);
     });
-    // console.log(APP.tracks);
     APP.loadCurrentTrack();
   },
   errorHandler: (ev) => {
-    console.log(ev.type, ", ", "error handler");
     let albumArt = document.querySelector(".album_art__image");
     albumArt.src = `./img/error-image.jpeg`;
 
     let ul = document.getElementById("playlist");
-    ul.innerHTML = `<h2 class="error-h2">Unable to reproduce music.</h2>`;
+    ul.innerHTML = `<h2 class="error-h2">Unable to reproduce music. There is a problem with the data.</h2>`;
   },
   loadCurrentTrack: () => {
     //load function in steve's video
     //use the currentTrack value to set the src of the APP.audio element
     APP.audio.src = `./media/${APP.tracks[APP.currentTrack]}`;
-    console.log("i am in load current tracks");
-    // console.log("Audio has been loaded", APP.audio.src);
     APP.currentTrackDecoration();
   },
   currentTrackDecoration: () => {
@@ -78,14 +74,10 @@ const APP = {
         return (currentArtist = artist.title);
       }
     });
-    console.log(currentArtist);
     let artistLi = document.querySelectorAll(".track__item");
-    console.log(artistLi);
     artistLi.forEach((artist) => {
-      console.log(artist);
       if (`${artist.id}` == `${currentArtist}`) {
         artist.classList.add("active-li");
-        console.log(artist);
       }
     });
   },
@@ -123,7 +115,6 @@ const APP = {
     APP.audio && APP.audio.pause();
   },
   durationchange: (ev) => {
-    console.log(ev.type);
     let totalTime = document.getElementById("total-time");
     let convertion = APP.convertTimeDisplay(APP.audio.duration);
     totalTime.textContent = convertion;
