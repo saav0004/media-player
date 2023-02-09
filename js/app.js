@@ -5,7 +5,7 @@ const APP = {
   currentTrack: 0, //the integer representing the index in the MEDIA array
   tracks: [], //array of tracks
   init: () => {
-    console.log("llegue a init");
+    console.log("I am in init");
     //called when DOMContentLoaded is triggered
     APP.addListeners();
     APP.buildPlaylist();
@@ -58,7 +58,7 @@ const APP = {
   errorHandler: (ev) => {
     console.log(ev.type, ", ", "error handler");
     let albumArt = document.querySelector(".album_art__image");
-    albumArt.src = `/img/error-image.jpeg`;
+    albumArt.src = `./img/error-image.jpeg`;
 
     let ul = document.getElementById("playlist");
     ul.innerHTML = `<h2 class="error-h2">Unable to reproduce music.</h2>`;
@@ -78,7 +78,7 @@ const APP = {
       if (artist.track == APP.tracks[0]) {
         largeImage = artist.large;
       }
-      albumArt.src = `/img/${largeImage}`;
+      albumArt.src = `./img/${largeImage}`;
     });
   },
   CheckPlayOrPause: () => {

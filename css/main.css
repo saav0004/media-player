@@ -229,7 +229,7 @@ header {
 .playlist {
   margin-left: 0;
   padding-left: 0;
-  padding-bottom: 4.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .track__item {
@@ -305,6 +305,7 @@ footer {
   padding: 1.5rem;
   align-items: center;
   position: sticky;
+  width: 100%;
   bottom: 0;
   z-index: 999999999999999;
 }
@@ -345,6 +346,7 @@ button {
 
   .playlist {
     padding-top: 2rem;
+    margin-bottom: 6rem;
     height: 100vh;
   }
 
@@ -364,5 +366,9 @@ button {
 
   .material-symbols-rounded {
     font-size: 3.4rem;
+  }
+
+  .material-symbols-rounded:hover {
+    color: var(--emerald);
   }
 }
