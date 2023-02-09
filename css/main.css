@@ -279,7 +279,9 @@ header {
   border-left: var(--emerald) 0.5rem solid;
 }
 
-.active-li 
+.active-li {
+  background-color: var(--vivid-burgundy);
+}
 
 /* .track__time {
   text-align: right;
