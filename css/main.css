@@ -138,6 +138,10 @@ header {
   );
 }
 
+.error-h2 {
+  color: var(--white);
+}
+
 .album_art__full {
   padding: 2rem;
   display: inline-flex;

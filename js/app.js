@@ -25,7 +25,7 @@ const APP = {
     // APP.audio.addEventListener("canplay", APP.canplay);
     APP.audio.addEventListener("durationchange", APP.durationchange);
     APP.audio.addEventListener("timeupdate", APP.currentTime);
-    APP.audio.addEventListener("error", APP.audioError);
+    APP.audio.addEventListener("error", APP.errorHandler);
     // APP.audio.addEventListener("play", APP.play);
     // APP.audio.addEventListener("pause", APP.pause);
   },
@@ -56,7 +56,12 @@ const APP = {
     APP.loadCurrentTrack();
   },
   errorHandler: (ev) => {
-    console.log("ERROR OH NOOO PLZZZZ");
+    console.log(ev.type, ", ", "error handler");
+    let albumArt = document.querySelector(".album_art__image");
+    albumArt.src = `/img/error-image.jpeg`;
+
+    let ul = document.getElementById("playlist");
+    ul.innerHTML = `<h2 class="error-h2">Unable to reproduce music.</h2>`;
   },
   loadCurrentTrack: () => {
     //load function in steve's video
