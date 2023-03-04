@@ -2,13 +2,12 @@ import { MEDIA } from "./media.js"; //the data file import
 
 const APP = {
   audio: new Audio(), //the Audio Element that will play every track
-  currentTrack: 0, //the integer representing the index in the MEDIA array
+  currentTrack: 2, //the integer representing the index in the MEDIA array
   tracks: [], //array of tracks
   init: () => {
     //called when DOMContentLoaded is triggered
     APP.addListeners();
     APP.buildPlaylist();
-    APP.loadLargeImage();
   },
   addListeners: () => {
     //? DOM events
@@ -47,10 +46,12 @@ const APP = {
 </li>`;
     }).join("");
 
+    console.table(MEDIA);
+
     // read the contents of MEDIA and create the playlist
-    let playList = MEDIA.map((music) => (music = music.track));
-    playList.forEach((music) => {
-      APP.tracks.push(music);
+
+    MEDIA.forEach((music) => {
+      APP.tracks.push(music.track);
     });
     APP.loadCurrentTrack();
   },
@@ -62,36 +63,50 @@ const APP = {
     ul.innerHTML = `<h2 class="error-h2">Unable to reproduce music. There is a problem with the data.</h2>`;
   },
   loadCurrentTrack: () => {
+    //load album art
+    let albumArt = document.querySelector(".album_art__image");
+
+    albumArt.src = `./img/${MEDIA[APP.currentTrack].large}`;
+
     //load function in steve's video
     //use the currentTrack value to set the src of the APP.audio element
-    APP.audio.src = `./media/${APP.tracks[APP.currentTrack]}`;
+    APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
     APP.currentTrackDecoration();
   },
   currentTrackDecoration: () => {
-    let currentArtist = "";
-    MEDIA.forEach((artist) => {
-      if (artist.track == APP.tracks[APP.currentTrack]) {
-        return (currentArtist = artist.title);
-      }
-    });
-    let artistLi = document.querySelectorAll(".track__item");
-    artistLi.forEach((artist) => {
-      if (`${artist.id}` == `${currentArtist}`) {
-        artist.classList.add("active-li");
-      }
-    });
-  },
-  loadLargeImage: () => {
-    let albumArt = document.querySelector(".album_art__image");
-    let largeImage = "";
+    // let trackDecoration = document.querySelectorAll(".track__item");
 
-    MEDIA.forEach((artist) => {
-      if (artist.track == APP.tracks[0]) {
-        largeImage = artist.large;
-      }
-      albumArt.src = `./img/${largeImage}`;
-    });
+    const currentArtist = MEDIA.find(
+      (artist) => artist.track === APP.tracks[APP.currentTrack]
+    ).title;
+    document
+      .querySelectorAll(".track__item")
+      .forEach((artist) =>
+        artist.classList.toggle("active-li", artist.id === currentArtist)
+      );
+
+    // console.log(trackDecoration);
+
+    // // [APP.currentTrack]
+
+    // // .classList.add("active_li");
+
+    // console.log(trackDecoration);
+
+    // let currentArtist = "";
+    // MEDIA.forEach((artist) => {
+    //   if (artist.track == APP.tracks[APP.currentTrack]) {
+    //     return (currentArtist = artist.title);
+    //   }
+    // });
+    // let artistLi = document.querySelectorAll(".track__item");
+    // artistLi.forEach((artist) => {
+    //   if (`${artist.id}` == `${currentArtist}`) {
+    //     artist.classList.add("active-li");
+    //   }
+    // });
   },
+
   CheckPlayOrPause: () => {
     let playButton = document.getElementById("btnPlay").firstElementChild;
     if (playButton.textContent === "play_arrow") {
@@ -104,7 +119,6 @@ const APP = {
   },
   play: () => {
     if (APP.audio.src) {
-      //start the track loaded into APP.audio playing
       APP.audio.play();
     } else {
       console.warn("You need to load a track first");
