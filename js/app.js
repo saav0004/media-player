@@ -74,16 +74,6 @@ const APP = {
     APP.currentTrackDecoration();
   },
   currentTrackDecoration: () => {
-    // const currentArtist = MEDIA.find(
-    //   (artist) => artist.track === APP.tracks[APP.currentTrack]
-    // ).title;
-    // document
-    //   .querySelectorAll(".track__item")
-    //   .forEach((artist) =>
-    //     artist.classList.toggle("active-li", artist.id === currentArtist)
-    //   );
-    // document.querySelectorAll(`track__item${[APP.currentTrack]}`).classList;
-
     document
       .querySelectorAll(".track__item")
       [APP.currentTrack].classList.add("active-li");
