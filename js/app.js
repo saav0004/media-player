@@ -2,7 +2,7 @@ import { MEDIA } from "./media.js"; //the data file import
 
 const APP = {
   audio: new Audio(), //the Audio Element that will play every track
-  currentTrack: 2, //the integer representing the index in the MEDIA array
+  currentTrack: 0, //the integer representing the index in the MEDIA array
   tracks: [], //array of tracks
   init: () => {
     //called when DOMContentLoaded is triggered
@@ -120,13 +120,23 @@ const APP = {
   play: () => {
     if (APP.audio.src) {
       APP.audio.play();
+      APP.animateEqualizer();
     } else {
       console.warn("You need to load a track first");
     }
   },
+  animateEqualizer: () => {
+    //if play, do this
+    let stroke = document.querySelectorAll(".stroke");
+
+    stroke.forEach((element) => element.classList.toggle("active"));
+
+    //if pause, do this.
+  },
   pause: () => {
     //pause the track loaded into APP.audio playing
     APP.audio && APP.audio.pause();
+    APP.animateEqualizer();
   },
   durationchange: (ev) => {
     let totalTime = document.getElementById("total-time");
