@@ -74,8 +74,6 @@ const APP = {
     APP.currentTrackDecoration();
   },
   currentTrackDecoration: () => {
-    // let trackDecoration = document.querySelectorAll(".track__item");
-
     const currentArtist = MEDIA.find(
       (artist) => artist.track === APP.tracks[APP.currentTrack]
     ).title;
@@ -84,27 +82,6 @@ const APP = {
       .forEach((artist) =>
         artist.classList.toggle("active-li", artist.id === currentArtist)
       );
-
-    // console.log(trackDecoration);
-
-    // // [APP.currentTrack]
-
-    // // .classList.add("active_li");
-
-    // console.log(trackDecoration);
-
-    // let currentArtist = "";
-    // MEDIA.forEach((artist) => {
-    //   if (artist.track == APP.tracks[APP.currentTrack]) {
-    //     return (currentArtist = artist.title);
-    //   }
-    // });
-    // let artistLi = document.querySelectorAll(".track__item");
-    // artistLi.forEach((artist) => {
-    //   if (`${artist.id}` == `${currentArtist}`) {
-    //     artist.classList.add("active-li");
-    //   }
-    // });
   },
 
   CheckPlayOrPause: () => {
@@ -126,12 +103,8 @@ const APP = {
     }
   },
   animateEqualizer: () => {
-    //if play, do this
     let stroke = document.querySelectorAll(".stroke");
-
     stroke.forEach((element) => element.classList.toggle("active"));
-
-    //if pause, do this.
   },
   pause: () => {
     //pause the track loaded into APP.audio playing

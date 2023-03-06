@@ -178,7 +178,7 @@ header {
   display: block;
   position: relative;
   background-color: var(--emerald);
-  height: 20%;
+  height: 15%;
   width: 5px;
   border-radius: 50px;
   margin: 0 5px;
@@ -188,7 +188,7 @@ header {
   display: block;
   position: relative;
   background-color: var(--emerald);
-  height: 20%;
+  height: 15%;
   width: 5px;
   border-radius: 50px;
   margin: 0 5px;
