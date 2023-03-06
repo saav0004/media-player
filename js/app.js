@@ -2,7 +2,7 @@ import { MEDIA } from "./media.js"; //the data file import
 
 const APP = {
   audio: new Audio(), //the Audio Element that will play every track
-  currentTrack: 0, //the integer representing the index in the MEDIA array
+  currentTrack: 4, //the integer representing the index in the MEDIA array
   tracks: [], //array of tracks
   init: () => {
     //called when DOMContentLoaded is triggered
@@ -74,14 +74,19 @@ const APP = {
     APP.currentTrackDecoration();
   },
   currentTrackDecoration: () => {
-    const currentArtist = MEDIA.find(
-      (artist) => artist.track === APP.tracks[APP.currentTrack]
-    ).title;
+    // const currentArtist = MEDIA.find(
+    //   (artist) => artist.track === APP.tracks[APP.currentTrack]
+    // ).title;
+    // document
+    //   .querySelectorAll(".track__item")
+    //   .forEach((artist) =>
+    //     artist.classList.toggle("active-li", artist.id === currentArtist)
+    //   );
+    // document.querySelectorAll(`track__item${[APP.currentTrack]}`).classList;
+
     document
       .querySelectorAll(".track__item")
-      .forEach((artist) =>
-        artist.classList.toggle("active-li", artist.id === currentArtist)
-      );
+      [APP.currentTrack].classList.add("active-li");
   },
 
   CheckPlayOrPause: () => {
