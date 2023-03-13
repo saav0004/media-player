@@ -2,7 +2,7 @@ import { MEDIA } from "./media.js"; //the data file import
 
 const APP = {
   audio: new Audio(), //the Audio Element that will play every track
-  currentTrack: 4, //the integer representing the index in the MEDIA array
+  currentTrack: 1, //the integer representing the index in the MEDIA array
   tracks: [], //array of tracks
   init: () => {
     //called when DOMContentLoaded is triggered
@@ -54,6 +54,7 @@ const APP = {
       APP.tracks.push(music.track);
     });
     APP.loadCurrentTrack();
+    APP.displayTrackDurations();
   },
   errorHandler: (ev) => {
     let albumArt = document.querySelector(".album_art__image");
@@ -110,6 +111,29 @@ const APP = {
     let totalTime = document.getElementById("total-time");
     let convertion = APP.convertTimeDisplay(APP.audio.duration);
     totalTime.textContent = convertion;
+  },
+  displayTrackDurations: () => {
+    MEDIA.forEach((track) => {
+      //create a temporary audio element to open the audio file
+      let tempAudio = new Audio(`./media/${track.track}`);
+
+      //listen for the event
+      tempAudio.addEventListener("durationchange", (ev) => {
+        let duration = ev.target.duration;
+        track["duration"] = duration;
+        //update the display by finding the playlist item with the matching img src
+        //or track title or track id...
+        let trackLi = document.querySelectorAll(".track__item");
+        trackLi.forEach((li) => {
+          if (li.id.includes(track.title)) {
+            //convert the duration in seconds to a 00:00 string
+            let timeString = APP.convertTimeDisplay(duration);
+            //update the playlist display for the matching item
+            li.querySelector("time").textContent = timeString;
+          }
+        });
+      });
+    });
   },
   currentTime: () => {
     let totalTime = document.getElementById("current-time");
