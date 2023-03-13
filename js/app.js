@@ -17,6 +17,9 @@ const APP = {
     document
       .getElementById("btnNext")
       .addEventListener("click", APP.nextButton);
+    document
+      .getElementById("btnPrev")
+      .addEventListener("click", APP.previousButton);
     //? AUDIO Event Listeners
 
     APP.audio.addEventListener("durationchange", APP.durationchange);
@@ -35,7 +38,7 @@ const APP = {
     APP.audio.src = `./media/${APP}`;
     let ul = document.getElementById("playlist");
     ul.innerHTML = MEDIA.map((music) => {
-      return `<li class="track__item" id="${music.title}">
+      return `<li class="track__item" id="${music.title}" data-track="${music.track}">
   <div class="track__thumb">
     <img src="./img/${music.thumbnail}" alt="artist album art thumbnail" />
   </div>
@@ -48,9 +51,6 @@ const APP = {
   </div>
 </li>`;
     }).join("");
-
-    console.table(MEDIA);
-
     // read the contents of MEDIA and create the playlist
 
     MEDIA.forEach((music) => {
@@ -69,18 +69,28 @@ const APP = {
   loadCurrentTrack: () => {
     //load album art
     let albumArt = document.querySelector(".album_art__image");
-
     albumArt.src = `./img/${MEDIA[APP.currentTrack].large}`;
-
     //load function in steve's video
     //use the currentTrack value to set the src of the APP.audio element
     APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
     APP.currentTrackDecoration();
   },
   currentTrackDecoration: () => {
-    document
-      .querySelectorAll(".track__item")
-      [APP.currentTrack].classList.add("active-li");
+    console.log(MEDIA);
+    console.log(APP.tracks[APP.currentTrack]);
+    const trackDecoration = MEDIA.find(
+      (item) => item.track === APP.tracks[APP.currentTrack]
+    ).title;
+    console.log(trackDecoration);
+
+    let currentTrackItem = document.querySelectorAll(".track__item");
+    currentTrackItem.forEach((artist) => {
+      if (artist.id === trackDecoration) {
+        artist.classList.add("active-li");
+      } else {
+        artist.classList.remove("active-li");
+      }
+    });
   },
 
   CheckPlayOrPause: () => {
@@ -109,6 +119,18 @@ const APP = {
       APP.currentTrack = 0;
     }
     APP.loadCurrentTrack();
+    APP.animateEqualizer();
+    APP.play();
+  },
+  previousButton: () => {
+    APP.audio.pause();
+    APP.currentTrack--;
+    console.log(APP.currentTrack);
+    if (APP.currentTrack < 0) {
+      APP.currentTrack = MEDIA.length - 1;
+    }
+    APP.loadCurrentTrack();
+    APP.animateEqualizer();
     APP.play();
   },
   animateEqualizer: () => {
