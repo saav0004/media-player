@@ -2,7 +2,7 @@ import { MEDIA } from "./media.js"; //the data file import
 
 const APP = {
   audio: new Audio(), //the Audio Element that will play every track
-  currentTrack: 1, //the integer representing the index in the MEDIA array
+  currentTrack: 0, //the integer representing the index in the MEDIA array
   tracks: [], //array of tracks
   init: () => {
     //called when DOMContentLoaded is triggered
@@ -14,6 +14,9 @@ const APP = {
     document
       .getElementById("btnPlay")
       .addEventListener("click", APP.CheckPlayOrPause);
+    document
+      .getElementById("btnNext")
+      .addEventListener("click", APP.nextButton);
     //? AUDIO Event Listeners
 
     APP.audio.addEventListener("durationchange", APP.durationchange);
@@ -97,6 +100,17 @@ const APP = {
     } else {
       console.warn("You need to load a track first");
     }
+  },
+  nextButton: () => {
+    APP.audio.pause();
+    APP.audio.currentTime = 0;
+    APP.currentTrack++;
+    console.log(APP.currentTrack);
+    APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
+    if (APP.currentTrack >= MEDIA.length) {
+      APP.currentTrack = 0;
+    }
+    APP.play();
   },
   animateEqualizer: () => {
     let stroke = document.querySelectorAll(".stroke");
