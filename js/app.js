@@ -103,13 +103,12 @@ const APP = {
   },
   nextButton: () => {
     APP.audio.pause();
-    APP.audio.currentTime = 0;
     APP.currentTrack++;
     console.log(APP.currentTrack);
-    APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
     if (APP.currentTrack >= MEDIA.length) {
       APP.currentTrack = 0;
     }
+    APP.loadCurrentTrack();
     APP.play();
   },
   animateEqualizer: () => {
