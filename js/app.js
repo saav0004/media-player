@@ -116,13 +116,13 @@ const APP = {
     if (event.target.closest("li") == null) {
       void 0;
     } else {
-      APP.audio.pause();
+      APP.pause();
       let clickedLi = event.target.closest("li").getAttribute("track-data");
       let index = MEDIA.findIndex((item) => item.track === clickedLi);
       console.log(index);
       APP.currentTrack = index;
       APP.loadCurrentTrack();
-      APP.audio.play();
+      APP.play();
     }
   },
   nextButton: () => {
