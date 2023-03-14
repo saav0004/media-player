@@ -126,25 +126,23 @@ const APP = {
     }
   },
   nextButton: () => {
-    APP.audio.pause();
+    APP.pause();
     APP.currentTrack++;
     console.log(APP.currentTrack);
     if (APP.currentTrack >= MEDIA.length) {
       APP.currentTrack = 0;
     }
     APP.loadCurrentTrack();
-    APP.animateEqualizer();
     APP.play();
   },
   previousButton: () => {
-    APP.audio.pause();
+    APP.pause();
     APP.currentTrack--;
     console.log(APP.currentTrack);
     if (APP.currentTrack < 0) {
       APP.currentTrack = MEDIA.length - 1;
     }
     APP.loadCurrentTrack();
-    APP.animateEqualizer();
     APP.play();
   },
   animateEqualizer: () => {
