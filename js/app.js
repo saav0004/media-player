@@ -20,6 +20,7 @@ const APP = {
     document
       .getElementById("btnPrev")
       .addEventListener("click", APP.previousButton);
+    document.querySelector("ul").addEventListener("click", APP.playClickedSong);
     //? AUDIO Event Listeners
 
     APP.audio.addEventListener("durationchange", APP.durationchange);
@@ -38,7 +39,7 @@ const APP = {
     APP.audio.src = `./media/${APP}`;
     let ul = document.getElementById("playlist");
     ul.innerHTML = MEDIA.map((music) => {
-      return `<li class="track__item" id="${music.title}" data-track="${music.track}">
+      return `<li class="track__item" id="${music.title}" track-data="${music.track}">
   <div class="track__thumb">
     <img src="./img/${music.thumbnail}" alt="artist album art thumbnail" />
   </div>
@@ -109,6 +110,19 @@ const APP = {
       APP.animateEqualizer();
     } else {
       console.warn("You need to load a track first");
+    }
+  },
+  playClickedSong: (event) => {
+    if (event.target.closest("li") == null) {
+      void 0;
+    } else {
+      APP.audio.pause();
+      let clickedLi = event.target.closest("li").getAttribute("track-data");
+      let index = MEDIA.findIndex((item) => item.track === clickedLi);
+      console.log(index);
+      APP.currentTrack = index;
+      APP.loadCurrentTrack();
+      APP.audio.play();
     }
   },
   nextButton: () => {
