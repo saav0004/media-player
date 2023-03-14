@@ -68,11 +68,9 @@ const APP = {
     ul.innerHTML = `<h2 class="error-h2">Unable to reproduce music. There is a problem with the data.</h2>`;
   },
   loadCurrentTrack: () => {
-    //load album art
+    //load image and track
     let albumArt = document.querySelector(".album_art__image");
     albumArt.src = `./img/${MEDIA[APP.currentTrack].large}`;
-    //load function in steve's video
-    //use the currentTrack value to set the src of the APP.audio element
     APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
     APP.currentTrackDecoration();
   },
