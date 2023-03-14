@@ -28,7 +28,7 @@ const APP = {
     APP.audio.addEventListener("error", APP.errorHandler);
 
     //? AUDIO Event listeners for future use
-    // APP.audio.addEventListener("ended", APP.ended);
+    APP.audio.addEventListener("ended", APP.ended);
     // APP.audio.addEventListener("loadstart", APP.loadstart);
     // APP.audio.addEventListener("loadedmetadata", APP.loadedmetadata);
     // APP.audio.addEventListener("canplay", APP.canplay);
@@ -153,6 +153,9 @@ const APP = {
     //pause the track loaded into APP.audio playing
     APP.audio && APP.audio.pause();
     APP.animateEqualizer();
+  },
+  ended: () => {
+    APP.nextButton();
   },
   durationchange: (ev) => {
     let totalTime = document.getElementById("total-time");
