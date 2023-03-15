@@ -70,12 +70,9 @@ const APP = {
     APP.currentTrackDecoration();
   },
   currentTrackDecoration: () => {
-    console.log(MEDIA);
-    console.log(APP.tracks[APP.currentTrack]);
     const trackDecoration = MEDIA.find(
       (item) => item.track === APP.tracks[APP.currentTrack]
     ).title;
-    console.log(trackDecoration);
 
     let currentTrackItem = document.querySelectorAll(".track__item");
     currentTrackItem.forEach((artist) => {
@@ -101,7 +98,6 @@ const APP = {
     if (APP.audio.src) {
       APP.audio.play();
       APP.animateEqualizer(true);
-      console.log("im in play");
     } else {
       console.warn("You need to load a track first");
     }
@@ -124,7 +120,6 @@ const APP = {
   nextButton: () => {
     APP.pause();
     APP.currentTrack++;
-    console.log(APP.currentTrack);
     if (APP.currentTrack >= MEDIA.length) {
       APP.currentTrack = 0;
     }
@@ -136,7 +131,6 @@ const APP = {
   previousButton: () => {
     APP.pause();
     APP.currentTrack--;
-    console.log(APP.currentTrack);
     if (APP.currentTrack < 0) {
       APP.currentTrack = MEDIA.length - 1;
     }
