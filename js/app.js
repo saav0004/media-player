@@ -129,6 +129,9 @@ const APP = {
       APP.currentTrack = 0;
     }
     APP.loadCurrentTrack();
+    APP.play();
+    let playButton = document.getElementById("btnPlay").firstElementChild;
+    playButton.innerHTML = "pause";
   },
   previousButton: () => {
     APP.pause();
@@ -139,6 +142,8 @@ const APP = {
     }
     APP.loadCurrentTrack();
     APP.play();
+    let playButton = document.getElementById("btnPlay").firstElementChild;
+    playButton.innerHTML = "pause";
   },
   animateEqualizer: (ev) => {
     let stroke = document.querySelectorAll(".stroke");
