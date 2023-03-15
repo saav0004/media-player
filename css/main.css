@@ -337,10 +337,6 @@ time {
   color: var(--emerald);
 }
 
-.track__time {
-  /* pointer-events: none; */
-}
-
 .times {
   text-align: center;
 }

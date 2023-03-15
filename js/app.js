@@ -5,7 +5,6 @@ const APP = {
   currentTrack: 0, //the integer representing the index in the MEDIA array
   tracks: [], //array of tracks
   init: () => {
-    //called when DOMContentLoaded is triggered
     APP.addListeners();
     APP.buildPlaylist();
   },
@@ -29,9 +28,6 @@ const APP = {
 
     //? AUDIO Event listeners for future use
     APP.audio.addEventListener("ended", APP.ended);
-    // APP.audio.addEventListener("loadstart", APP.loadstart);
-    // APP.audio.addEventListener("loadedmetadata", APP.loadedmetadata);
-    // APP.audio.addEventListener("canplay", APP.canplay);
     // APP.audio.addEventListener("play", APP.play);
     // APP.audio.addEventListener("pause", APP.pause);
   },
@@ -52,7 +48,6 @@ const APP = {
   </div>
 </li>`;
     }).join("");
-    // read the contents of MEDIA and create the playlist
 
     MEDIA.forEach((music) => {
       APP.tracks.push(music.track);
@@ -105,21 +100,24 @@ const APP = {
   play: () => {
     if (APP.audio.src) {
       APP.audio.play();
-      APP.animateEqualizer();
+      APP.animateEqualizer(true);
+      console.log("im in play");
     } else {
       console.warn("You need to load a track first");
     }
   },
   playClickedSong: (event) => {
     if (event.target.closest("li") == null) {
-      void 0;
+      return;
     } else {
       APP.pause();
       let clickedLi = event.target.closest("li").getAttribute("track-data");
       let index = MEDIA.findIndex((item) => item.track === clickedLi);
-      console.log(index);
       APP.currentTrack = index;
       APP.loadCurrentTrack();
+
+      let playButton = document.getElementById("btnPlay").firstElementChild;
+      playButton.innerHTML = "pause";
       APP.play();
     }
   },
@@ -131,7 +129,6 @@ const APP = {
       APP.currentTrack = 0;
     }
     APP.loadCurrentTrack();
-    APP.play();
   },
   previousButton: () => {
     APP.pause();
@@ -143,14 +140,18 @@ const APP = {
     APP.loadCurrentTrack();
     APP.play();
   },
-  animateEqualizer: () => {
+  animateEqualizer: (ev) => {
     let stroke = document.querySelectorAll(".stroke");
-    stroke.forEach((element) => element.classList.toggle("active"));
+    if (ev) {
+      stroke.forEach((element) => element.classList.add("active"));
+    } else {
+      stroke.forEach((element) => element.classList.remove("active"));
+    }
   },
   pause: () => {
     //pause the track loaded into APP.audio playing
     APP.audio && APP.audio.pause();
-    APP.animateEqualizer();
+    APP.animateEqualizer(false);
   },
   ended: () => {
     APP.nextButton();
