@@ -202,5 +202,3 @@ const APP = {
 };
 
 document.addEventListener("DOMContentLoaded", APP.init);
-
-// ! Does this work?
