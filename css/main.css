@@ -248,8 +248,8 @@ header {
 }
 
 .track__item {
-  border: 0.12rem solid #767676;
-  background-color: #181818;
+  /* border: 0.12rem solid #3a3a3a; */
+  background-color: #242424;
   display: flex;
   justify-content: space-between;
   gap: 2rem;
@@ -263,7 +263,7 @@ header {
 }
 
 .track__item:hover {
-  background-color: #232323;
+  background-color: #323232;
 }
 
 .track__thumb {
