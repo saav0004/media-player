@@ -35,7 +35,7 @@ const APP = {
     APP.audio.src = `./media/${APP}`;
     let ul = document.getElementById("playlist");
     ul.innerHTML = MEDIA.map((music) => {
-      return `<li class="track__item" id="${music.title}" track-data="${music.track}">
+      return `<li class="track__item" id="${music.title}" data-track="${music.track}">
   <div class="track__thumb">
     <img src="./img/${music.thumbnail}" alt="artist album art thumbnail" />
   </div>
@@ -107,7 +107,7 @@ const APP = {
       return;
     } else {
       APP.pause();
-      let clickedLi = event.target.closest("li").getAttribute("track-data");
+      let clickedLi = event.target.closest("li").getAttribute("data-track");
       let index = MEDIA.findIndex((item) => item.track === clickedLi);
       APP.currentTrack = index;
       APP.loadCurrentTrack();
