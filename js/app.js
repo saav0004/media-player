@@ -23,13 +23,15 @@ const APP = {
     //? AUDIO Event Listeners
 
     APP.audio.addEventListener("durationchange", APP.durationchange);
-    APP.audio.addEventListener("timeupdate", APP.currentTime);
+    APP.audio.addEventListener("timeupdate", APP.currentTimeDisplay);
     APP.audio.addEventListener("error", APP.errorHandler);
 
     //? AUDIO Event listeners for future use
     APP.audio.addEventListener("ended", APP.ended);
-    // APP.audio.addEventListener("play", APP.play);
-    // APP.audio.addEventListener("pause", APP.pause);
+    //! PROGRESS BAR
+    document
+      .querySelector(".progress")
+      .addEventListener("click", APP.seekClick);
   },
   buildPlaylist: () => {
     APP.audio.src = `./media/${APP}`;
@@ -111,7 +113,6 @@ const APP = {
       let index = MEDIA.findIndex((item) => item.track === clickedLi);
       APP.currentTrack = index;
       APP.loadCurrentTrack();
-
       let playButton = document.getElementById("btnPlay").firstElementChild;
       playButton.innerHTML = "pause";
       APP.play();
@@ -157,8 +158,8 @@ const APP = {
   },
   durationchange: (ev) => {
     let totalTime = document.getElementById("total-time");
-    let convertion = APP.convertTimeDisplay(APP.audio.duration);
-    totalTime.textContent = convertion;
+    let conversion = APP.convertTimeDisplay(APP.audio.duration);
+    totalTime.textContent = conversion;
   },
   displayTrackDurations: () => {
     MEDIA.forEach((track) => {
@@ -183,10 +184,32 @@ const APP = {
       });
     });
   },
-  currentTime: () => {
+  currentTimeDisplay: () => {
     let totalTime = document.getElementById("current-time");
-    let convertion = APP.convertTimeDisplay(APP.audio.currentTime);
-    totalTime.textContent = convertion;
+    let conversion = APP.convertTimeDisplay(APP.audio.currentTime);
+    totalTime.textContent = conversion;
+    APP.showPercentageComplete();
+  },
+  showPercentageComplete: () => {
+    if (APP.audio.currentTime === 0) {
+      let played = document.querySelector(".played");
+      played.style.width = `${0}%`;
+      return;
+    } else {
+      let percentageComplete = APP.audio.currentTime / APP.audio.duration;
+      let percentageCompleteText = (percentageComplete * 100).toFixed(2);
+      let played = document.querySelector(".played");
+      played.style.width = `${percentageCompleteText}%`;
+    }
+  },
+  seekClick: (ev) => {
+    console.log(ev);
+    let xPos = ev.offsetX;
+    console.log(xPos);
+    let progressBarWidth = document.querySelector(".progress").clientWidth;
+    console.log(progressBarWidth);
+    let currentClick = (xPos / progressBarWidth) * APP.audio.duration;
+    APP.audio.currentTime = currentClick;
   },
   convertTimeDisplay: (seconds) => {
     //convert the seconds parameter to `00:00` style display
