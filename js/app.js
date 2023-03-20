@@ -19,6 +19,9 @@ const APP = {
     document
       .getElementById("btnPrev")
       .addEventListener("click", APP.previousButton);
+    document
+      .getElementById("btnShuffle")
+      .addEventListener("click", APP.shuffleSong);
     document.querySelector("ul").addEventListener("click", APP.playClickedSong);
     //? AUDIO Event Listeners
 
@@ -203,13 +206,13 @@ const APP = {
     }
   },
   seekClick: (ev) => {
-    console.log(ev);
     let xPos = ev.offsetX;
-    console.log(xPos);
     let progressBarWidth = document.querySelector(".progress").clientWidth;
-    console.log(progressBarWidth);
     let currentClick = (xPos / progressBarWidth) * APP.audio.duration;
     APP.audio.currentTime = currentClick;
+  },
+  shuffleSong: () => {
+    console.log(MEDIA.shuffle());
   },
   convertTimeDisplay: (seconds) => {
     //convert the seconds parameter to `00:00` style display

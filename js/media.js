@@ -49,4 +49,5 @@ const MEDIA = [
     large: "reloj-full.png",
   },
 ];
+
 export { MEDIA };
