@@ -28,8 +28,6 @@ const APP = {
     APP.audio.addEventListener("durationchange", APP.durationchange);
     APP.audio.addEventListener("timeupdate", APP.currentTimeDisplay);
     APP.audio.addEventListener("error", APP.errorHandler);
-
-    //? AUDIO Event listeners for future use
     APP.audio.addEventListener("ended", APP.ended);
     //! PROGRESS BAR
     document
@@ -144,11 +142,14 @@ const APP = {
     playButton.innerHTML = "pause";
   },
   animateEqualizer: (ev) => {
+    let albumImage = document.querySelector(".album_art__image");
     let stroke = document.querySelectorAll(".stroke");
     if (ev) {
       stroke.forEach((element) => element.classList.add("active"));
+      albumImage.classList.add("active");
     } else {
       stroke.forEach((element) => element.classList.remove("active"));
+      albumImage.classList.remove("active");
     }
   },
   pause: () => {
@@ -212,7 +213,17 @@ const APP = {
     APP.audio.currentTime = currentClick;
   },
   shuffleSong: () => {
-    console.log(MEDIA.shuffle());
+    APP.pause();
+    APP.tracks.shuffle();
+    console.log(APP.currentTrack);
+    console.log(APP.tracks);
+    APP.currentTrack = 0;
+    APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
+    console.log(APP.audio.src);
+    // APP.loadCurrentTrack();
+    APP.currentTrackDecoration();
+    APP.play();
+    console.log(APP.audio.src);
   },
   convertTimeDisplay: (seconds) => {
     //convert the seconds parameter to `00:00` style display
