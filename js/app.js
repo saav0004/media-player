@@ -67,17 +67,8 @@ const APP = {
   },
   loadCurrentTrack: () => {
     APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
-    //load image and track
     let albumArt = document.querySelector(".album_art__image");
     albumArt.src = `./img/${MEDIA[APP.currentTrack].large}`;
-
-    // let n = MEDIA.find(
-    //   (artist) => artist.track === APP.tracks[APP.currentTrack]
-    // );
-    // console.log(n.large);
-
-    console.log(albumArt.src);
-    console.log("I am in current track" + " " + APP.audio.src);
     APP.currentTrackDecoration();
   },
   currentTrackDecoration: () => {
@@ -228,7 +219,6 @@ const APP = {
     playButton.innerHTML = "play_arrow";
     APP.currentTrack = 0;
     MEDIA.shuffle();
-    console.log(MEDIA);
     APP.tracks = [];
     APP.buildPlaylist();
   },
