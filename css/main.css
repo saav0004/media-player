@@ -150,26 +150,25 @@ header {
   align-self: center;
   width: min(38rem, 100%);
 }
-
 .album_art__image {
-  opacity: 1;
-  transition: opacity 0.5s;
+  transition: border-radius 0.1s ease-in-out;
 }
-
 .album_art__image.active {
-  opacity: 0.5;
-  animation: fade 2s infinite;
+  transition: border-radius 0.5s ease-in-out;
+  animation: fade 50s linear infinite;
+  border-radius: 50%;
 }
 
 @keyframes fade {
   0% {
-    opacity: 0;
+    transform: rotate(0deg);
   }
+
   50% {
-    opacity: 1;
+    transform: rotate(180deg);
   }
   100% {
-    opacity: 0;
+    transform: rotate(360deg);
   }
 }
 
