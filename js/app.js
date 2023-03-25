@@ -34,8 +34,8 @@ const APP = {
       .querySelector(".progress")
       .addEventListener("click", APP.seekClick);
   },
-  buildPlaylist: () => {
-    APP.audio.src = `./media/${APP}`;
+  buildPlaylist: (ev) => {
+    APP.audio.src = `./media/${APP.tracks[APP.currentTrack]}`;
     let ul = document.getElementById("playlist");
     ul.innerHTML = MEDIA.map((music) => {
       return `<li class="track__item" id="${music.title}" data-track="${music.track}">
@@ -66,10 +66,18 @@ const APP = {
     ul.innerHTML = `<h2 class="error-h2">Unable to reproduce music. There is a problem with the data.</h2>`;
   },
   loadCurrentTrack: () => {
+    APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
     //load image and track
     let albumArt = document.querySelector(".album_art__image");
     albumArt.src = `./img/${MEDIA[APP.currentTrack].large}`;
-    APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
+
+    // let n = MEDIA.find(
+    //   (artist) => artist.track === APP.tracks[APP.currentTrack]
+    // );
+    // console.log(n.large);
+
+    console.log(albumArt.src);
+    console.log("I am in current track" + " " + APP.audio.src);
     APP.currentTrackDecoration();
   },
   currentTrackDecoration: () => {
@@ -86,7 +94,17 @@ const APP = {
       }
     });
   },
-
+  animateEqualizer: (ev) => {
+    let albumImage = document.querySelector(".album_art__image");
+    let stroke = document.querySelectorAll(".stroke");
+    if (ev) {
+      stroke.forEach((element) => element.classList.add("active"));
+      albumImage.classList.add("active");
+    } else {
+      stroke.forEach((element) => element.classList.remove("active"));
+      albumImage.classList.remove("active");
+    }
+  },
   CheckPlayOrPause: () => {
     let playButton = document.getElementById("btnPlay").firstElementChild;
     if (playButton.textContent === "play_arrow") {
@@ -141,16 +159,11 @@ const APP = {
     let playButton = document.getElementById("btnPlay").firstElementChild;
     playButton.innerHTML = "pause";
   },
-  animateEqualizer: (ev) => {
-    let albumImage = document.querySelector(".album_art__image");
-    let stroke = document.querySelectorAll(".stroke");
-    if (ev) {
-      stroke.forEach((element) => element.classList.add("active"));
-      albumImage.classList.add("active");
-    } else {
-      stroke.forEach((element) => element.classList.remove("active"));
-      albumImage.classList.remove("active");
-    }
+  seekClick: (ev) => {
+    let xPos = ev.offsetX;
+    let progressBarWidth = document.querySelector(".progress").clientWidth;
+    let currentClick = (xPos / progressBarWidth) * APP.audio.duration;
+    APP.audio.currentTime = currentClick;
   },
   pause: () => {
     //pause the track loaded into APP.audio playing
@@ -206,24 +219,15 @@ const APP = {
       played.style.width = `${percentageCompleteText}%`;
     }
   },
-  seekClick: (ev) => {
-    let xPos = ev.offsetX;
-    let progressBarWidth = document.querySelector(".progress").clientWidth;
-    let currentClick = (xPos / progressBarWidth) * APP.audio.duration;
-    APP.audio.currentTime = currentClick;
-  },
   shuffleSong: () => {
     APP.pause();
-    APP.tracks.shuffle();
-    console.log(APP.currentTrack);
-    console.log(APP.tracks);
+    let playButton = document.getElementById("btnPlay").firstElementChild;
+    playButton.innerHTML = "play_arrow";
     APP.currentTrack = 0;
-    APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
-    console.log(APP.audio.src);
-    // APP.loadCurrentTrack();
-    APP.currentTrackDecoration();
-    APP.play();
-    console.log(APP.audio.src);
+    MEDIA.shuffle();
+    console.log(MEDIA);
+    APP.tracks = [];
+    APP.buildPlaylist();
   },
   convertTimeDisplay: (seconds) => {
     //convert the seconds parameter to `00:00` style display
