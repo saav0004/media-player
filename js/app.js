@@ -96,13 +96,16 @@ const APP = {
   },
   animateEqualizer: (ev) => {
     let albumImage = document.querySelector(".album_art__image");
+    let backgroundImageDiv = document.querySelector(".album_art__full");
     let stroke = document.querySelectorAll(".stroke");
     if (ev) {
       stroke.forEach((element) => element.classList.add("active"));
       albumImage.classList.add("active");
+      backgroundImageDiv.classList.add("active");
     } else {
       stroke.forEach((element) => element.classList.remove("active"));
       albumImage.classList.remove("active");
+      backgroundImageDiv.classList.remove("active");
     }
   },
   CheckPlayOrPause: () => {
