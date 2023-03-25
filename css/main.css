@@ -150,10 +150,27 @@ header {
   align-self: center;
   width: min(38rem, 100%);
 }
+.album_art__image {
+  transition: border-radius 0.1s ease-in-out;
+}
+.album_art__image.active {
+  transition: border-radius 0.5s ease-in-out;
+  animation: fade 50s linear infinite;
+  border-radius: 50%;
+}
 
-/* .album_art__image {
-  
-} */
+@keyframes fade {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 #btnShuffle {
   align-self: center;
@@ -229,6 +246,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin-top: 1rem;
 }
 
 /* MAIN */
@@ -302,7 +320,7 @@ header {
 
 .progress {
   display: block;
-  height: 6px;
+  height: 10px;
   background-color: var(--white);
   border-radius: 10px;
 }
@@ -310,8 +328,8 @@ header {
   border-radius: 10px;
   display: block;
   background-color: var(--emerald);
-  width: 20%;
-  height: 6px;
+  width: 0;
+  height: 10px;
 }
 
 .nbsp {

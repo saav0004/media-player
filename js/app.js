@@ -19,20 +19,23 @@ const APP = {
     document
       .getElementById("btnPrev")
       .addEventListener("click", APP.previousButton);
+    document
+      .getElementById("btnShuffle")
+      .addEventListener("click", APP.shuffleSong);
     document.querySelector("ul").addEventListener("click", APP.playClickedSong);
     //? AUDIO Event Listeners
 
     APP.audio.addEventListener("durationchange", APP.durationchange);
-    APP.audio.addEventListener("timeupdate", APP.currentTime);
+    APP.audio.addEventListener("timeupdate", APP.currentTimeDisplay);
     APP.audio.addEventListener("error", APP.errorHandler);
-
-    //? AUDIO Event listeners for future use
     APP.audio.addEventListener("ended", APP.ended);
-    // APP.audio.addEventListener("play", APP.play);
-    // APP.audio.addEventListener("pause", APP.pause);
+    //! PROGRESS BAR
+    document
+      .querySelector(".progress")
+      .addEventListener("click", APP.seekClick);
   },
-  buildPlaylist: () => {
-    APP.audio.src = `./media/${APP}`;
+  buildPlaylist: (ev) => {
+    APP.audio.src = `./media/${APP.tracks[APP.currentTrack]}`;
     let ul = document.getElementById("playlist");
     ul.innerHTML = MEDIA.map((music) => {
       return `<li class="track__item" id="${music.title}" data-track="${music.track}">
@@ -63,10 +66,18 @@ const APP = {
     ul.innerHTML = `<h2 class="error-h2">Unable to reproduce music. There is a problem with the data.</h2>`;
   },
   loadCurrentTrack: () => {
+    APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
     //load image and track
     let albumArt = document.querySelector(".album_art__image");
     albumArt.src = `./img/${MEDIA[APP.currentTrack].large}`;
-    APP.audio.src = `./media/${MEDIA[APP.currentTrack].track}`;
+
+    // let n = MEDIA.find(
+    //   (artist) => artist.track === APP.tracks[APP.currentTrack]
+    // );
+    // console.log(n.large);
+
+    console.log(albumArt.src);
+    console.log("I am in current track" + " " + APP.audio.src);
     APP.currentTrackDecoration();
   },
   currentTrackDecoration: () => {
@@ -83,7 +94,17 @@ const APP = {
       }
     });
   },
-
+  animateEqualizer: (ev) => {
+    let albumImage = document.querySelector(".album_art__image");
+    let stroke = document.querySelectorAll(".stroke");
+    if (ev) {
+      stroke.forEach((element) => element.classList.add("active"));
+      albumImage.classList.add("active");
+    } else {
+      stroke.forEach((element) => element.classList.remove("active"));
+      albumImage.classList.remove("active");
+    }
+  },
   CheckPlayOrPause: () => {
     let playButton = document.getElementById("btnPlay").firstElementChild;
     if (playButton.textContent === "play_arrow") {
@@ -111,7 +132,6 @@ const APP = {
       let index = MEDIA.findIndex((item) => item.track === clickedLi);
       APP.currentTrack = index;
       APP.loadCurrentTrack();
-
       let playButton = document.getElementById("btnPlay").firstElementChild;
       playButton.innerHTML = "pause";
       APP.play();
@@ -139,13 +159,11 @@ const APP = {
     let playButton = document.getElementById("btnPlay").firstElementChild;
     playButton.innerHTML = "pause";
   },
-  animateEqualizer: (ev) => {
-    let stroke = document.querySelectorAll(".stroke");
-    if (ev) {
-      stroke.forEach((element) => element.classList.add("active"));
-    } else {
-      stroke.forEach((element) => element.classList.remove("active"));
-    }
+  seekClick: (ev) => {
+    let xPos = ev.offsetX;
+    let progressBarWidth = document.querySelector(".progress").clientWidth;
+    let currentClick = (xPos / progressBarWidth) * APP.audio.duration;
+    APP.audio.currentTime = currentClick;
   },
   pause: () => {
     //pause the track loaded into APP.audio playing
@@ -157,8 +175,8 @@ const APP = {
   },
   durationchange: (ev) => {
     let totalTime = document.getElementById("total-time");
-    let convertion = APP.convertTimeDisplay(APP.audio.duration);
-    totalTime.textContent = convertion;
+    let conversion = APP.convertTimeDisplay(APP.audio.duration);
+    totalTime.textContent = conversion;
   },
   displayTrackDurations: () => {
     MEDIA.forEach((track) => {
@@ -183,10 +201,33 @@ const APP = {
       });
     });
   },
-  currentTime: () => {
+  currentTimeDisplay: () => {
     let totalTime = document.getElementById("current-time");
-    let convertion = APP.convertTimeDisplay(APP.audio.currentTime);
-    totalTime.textContent = convertion;
+    let conversion = APP.convertTimeDisplay(APP.audio.currentTime);
+    totalTime.textContent = conversion;
+    APP.showPercentageComplete();
+  },
+  showPercentageComplete: () => {
+    if (APP.audio.currentTime === 0) {
+      let played = document.querySelector(".played");
+      played.style.width = `${0}%`;
+      return;
+    } else {
+      let percentageComplete = APP.audio.currentTime / APP.audio.duration;
+      let percentageCompleteText = (percentageComplete * 100).toFixed(2);
+      let played = document.querySelector(".played");
+      played.style.width = `${percentageCompleteText}%`;
+    }
+  },
+  shuffleSong: () => {
+    APP.pause();
+    let playButton = document.getElementById("btnPlay").firstElementChild;
+    playButton.innerHTML = "play_arrow";
+    APP.currentTrack = 0;
+    MEDIA.shuffle();
+    console.log(MEDIA);
+    APP.tracks = [];
+    APP.buildPlaylist();
   },
   convertTimeDisplay: (seconds) => {
     //convert the seconds parameter to `00:00` style display
