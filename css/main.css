@@ -439,6 +439,7 @@ button {
 #volumeIcon {
   color: var(--white);
   font-size: 1.5rem;
+  cursor: default;
 }
 
 .volume-control #volumeIcon {
@@ -483,5 +484,35 @@ button {
 
   .material-symbols-rounded:hover {
     color: var(--emerald);
+  }
+
+  .volume-icon-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer; /* Add a pointer cursor on hover */
+
+    /* Add other styling as needed for your volume icon */
+  }
+
+  .tooltip {
+    visibility: hidden;
+    width: 60px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .volume-icon-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
   }
 }
