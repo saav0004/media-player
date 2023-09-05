@@ -7,6 +7,7 @@ const APP = {
   init: () => {
     APP.addListeners();
     APP.buildPlaylist();
+    APP.setupVolumeControl();
   },
   addListeners: () => {
     //? DOM events
@@ -232,6 +233,28 @@ const APP = {
       .padStart(2, "0");
 
     return `${flooredMinutes}:${flooredSeconds}`;
+  },
+  setupVolumeControl: () => {
+    const volumeSlider = document.getElementById("volumeSlider");
+    const volumeIcon = document.getElementById("volumeIcon");
+
+    // Event listener for volume control
+    volumeSlider.addEventListener("input", () => {
+      // Get the value of the volume slider (between 0 and 1)
+      const volume = parseFloat(volumeSlider.value);
+
+      // Set the audio volume to the selected value (replace with your audio element reference)
+      APP.audio.volume = volume;
+
+      // Update the volume icon depending on the volume level
+      if (volume === 0) {
+        volumeIcon.textContent = "volume_mute";
+      } else if (volume <= 0.5) {
+        volumeIcon.textContent = "volume_down";
+      } else {
+        volumeIcon.textContent = "volume_up";
+      }
+    });
   },
 };
 

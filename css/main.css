@@ -405,6 +405,42 @@ button {
   padding: 1rem;
 }
 
+/* VOLUME CONTROL */
+
+.volume-control {
+  display: flex;
+  flex-direction: row;
+  /* align-content: center; */
+  justify-content: center;
+  align-items: center;
+}
+
+/* VOLUME SLIDER */
+#volumeSlider {
+  -webkit-appearance: none;
+  width: 10rem;
+  height: 8px;
+  border-radius: 10px;
+  background: var(--white);
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+#volumeSlider::-webkit-slider-thumb {
+  /* Change the color of the slider thumb (handle) in WebKit (Chrome) browsers */
+  background-color: var(
+    --emerald
+  ); /* Replace "your-thumb-color" with your desired color */
+}
+
+/* VOLUME ICON */
+
+#volumeIcon {
+  color: var(--white);
+  font-size: 1.5rem;
+}
+
 @media only screen and (min-width: 60em) {
   .main__content {
     display: flex;
