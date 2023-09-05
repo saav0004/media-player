@@ -24,6 +24,9 @@ const APP = {
       .getElementById("btnShuffle")
       .addEventListener("click", APP.shuffleSong);
     document.querySelector("ul").addEventListener("click", APP.playClickedSong);
+    document
+      .getElementById("volumeIcon")
+      .addEventListener("click", APP.muteUnmute);
     //? AUDIO Event Listeners
 
     APP.audio.addEventListener("durationchange", APP.durationchange);
@@ -248,6 +251,8 @@ const APP = {
 
       // Update the volume icon depending on the volume level
       if (volume === 0) {
+        volumeIcon.textContent = "volume_off";
+      } else if (volume <= 0.25) {
         volumeIcon.textContent = "volume_mute";
       } else if (volume <= 0.5) {
         volumeIcon.textContent = "volume_down";
@@ -255,6 +260,19 @@ const APP = {
         volumeIcon.textContent = "volume_up";
       }
     });
+  },
+  muteUnmute: () => {
+    const volumeSlider = document.getElementById("volumeSlider");
+    const volumeIcon = document.getElementById("volumeIcon");
+    if (volumeIcon.textContent === "volume_up") {
+      volumeIcon.textContent = "volume_mute";
+      volumeSlider.value = 0;
+      APP.audio.volume = 0;
+    } else {
+      volumeIcon.textContent = "volume_up";
+      volumeSlider.value = 1;
+      APP.audio.volume = 1;
+    }
   },
 };
 
