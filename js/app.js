@@ -7,6 +7,7 @@ const APP = {
   init: () => {
     APP.addListeners();
     APP.buildPlaylist();
+    APP.setupVolumeControl();
   },
   addListeners: () => {
     //? DOM events
@@ -23,6 +24,9 @@ const APP = {
       .getElementById("btnShuffle")
       .addEventListener("click", APP.shuffleSong);
     document.querySelector("ul").addEventListener("click", APP.playClickedSong);
+    document
+      .getElementById("volumeIcon")
+      .addEventListener("click", APP.muteUnmute);
     //? AUDIO Event Listeners
 
     APP.audio.addEventListener("durationchange", APP.durationchange);
@@ -232,6 +236,43 @@ const APP = {
       .padStart(2, "0");
 
     return `${flooredMinutes}:${flooredSeconds}`;
+  },
+  setupVolumeControl: () => {
+    const volumeSlider = document.getElementById("volumeSlider");
+    const volumeIcon = document.getElementById("volumeIcon");
+
+    // Event listener for volume control
+    volumeSlider.addEventListener("input", () => {
+      // Get the value of the volume slider (between 0 and 1)
+      const volume = parseFloat(volumeSlider.value);
+
+      // Set the audio volume to the selected value (replace with your audio element reference)
+      APP.audio.volume = volume;
+
+      // Update the volume icon depending on the volume level
+      if (volume === 0) {
+        volumeIcon.textContent = "volume_off";
+      } else if (volume <= 0.25) {
+        volumeIcon.textContent = "volume_mute";
+      } else if (volume <= 0.5) {
+        volumeIcon.textContent = "volume_down";
+      } else {
+        volumeIcon.textContent = "volume_up";
+      }
+    });
+  },
+  muteUnmute: () => {
+    const volumeSlider = document.getElementById("volumeSlider");
+    const volumeIcon = document.getElementById("volumeIcon");
+    if (volumeIcon.textContent === "volume_up") {
+      volumeIcon.textContent = "volume_mute";
+      volumeSlider.value = 0;
+      APP.audio.volume = 0;
+    } else {
+      volumeIcon.textContent = "volume_up";
+      volumeSlider.value = 1;
+      APP.audio.volume = 1;
+    }
   },
 };
 
